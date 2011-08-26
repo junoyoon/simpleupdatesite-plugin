@@ -1,0 +1,77 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	xmlns:i="jelly:fmt" xmlns:local="local">
+	<script type="text/javascript" language="javascript"><![CDATA[
+function getClickedPlugins(form) {
+	var plugins = new Array();
+	for( var i=0; i<form.elements.length; i++ ) {
+	    var e = form.elements[i];
+	    var type = e.getAttribute("type");
+	    if(type==null)  type="";
+	    if ("checkbox" == type && e.checked == true) {
+	    	plugins.push(e);
+	    }
+	}
+	return plugins;
+}
+
+function refreshPluginInfo(callUrl, baseElement) {
+	doAjaxCall(callUrl, {}, baseElement, true);
+}
+
+function refreshNews(callUrl, baseElement) {
+	doAjaxCall(callUrl, {}, baseElement, true);
+}
+function installSubmit(obj) {
+	if (getClickedPlugins(obj).length == 0) {
+		alert("no plugin selected!");
+		return;
+	}
+	obj.submit();
+}
+
+function hideSelectedPlugins(callUrl, form, baseElement) {
+	var plugins = getClickedPlugins(form);
+	if (plugins.length == 0) {
+		alert("Please click checkboxs before hidding plugins");
+		return;
+	}	
+	var parameters={}
+	for(var i=0; i< plugins.length; i++ ) {
+		parameters[plugins[i].name] = 1;
+	}
+	doAjaxCall(callUrl, parameters, baseElement, true);
+}
+
+function showAllHiddenPlugins(callUrl, baseElement) {
+	doAjaxCall(callUrl, {}, baseElement, true);
+}
+
+function doAjaxCall(checkUrl, parameters, baseElement, refreshRequired) {
+	var spinner = Element.up(baseElement, "DIV").nextSibling;
+	var target = spinner.nextSibling;
+	spinner.style.display = "block";
+	new Ajax.Request(
+			checkUrl,
+			{
+				parameters : parameters,
+				onComplete : function(rsp) {
+					spinner.style.display = "none";
+					var i;
+					target.innerHTML = rsp.status == 200 ? rsp.responseText
+							: '<a href="" onclick="document.getElementById(\'valerr'
+									+ (i = iota++)
+									+ '\').style.display=\'block\';return false">ERROR</a><div id="valerr'
+									+ i
+									+ '" style="display:none">'
+									+ rsp.responseText + '</div>';
+					if (rsp.responseText.indexOf('error') < 0 && refreshRequired) {
+						setTimeout("window.location.reload(true)", 1000);
+					}
+				}
+			});
+}
+				
+]]>
+	</script>
+</j:jelly>

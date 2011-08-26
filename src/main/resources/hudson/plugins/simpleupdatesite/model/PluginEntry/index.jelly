@@ -1,0 +1,39 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<tr class="nopadding">
+		<td class="nopadding">
+			<j:if test="${!it.installed}">
+				<j:if test="${!it.forNewerHudson}">
+					<input type="checkbox" class="pluginselect" name="${it.key}" value="1"
+						style="margin-top:0px;margin-bottom:0px;padding:0px;" />
+				</j:if>
+				<j:if test="${it.forNewerHudson}">
+					<img src="${rootURL}/plugin/simpleupdatesite/img/incompatible.gif"
+						tooltip="Hudson Core after ${it.requiredCore} is necessary for this plugin." />
+				</j:if>
+			</j:if>
+			<j:if test="${it.installed}">
+			</j:if>
+		</td>
+		<td class="nopadding">
+			<j:if test="${!it.installed}">
+				<j:if test="${it.update}">
+					<img src="${rootURL}/plugin/simpleupdatesite/img/updatedplugin.gif"
+						style="margin-top:1px;" tooltip="Update" />
+				</j:if>
+				<j:if test="${!it.update}">
+					<img src="${rootURL}/plugin/simpleupdatesite/img/newplugin.gif"
+						style="margin-top:1px;" tooltip="New Plugin" />
+				</j:if>
+			</j:if>
+			<j:if test="${it.installed}">
+				<img src="${rootURL}/plugin/simpleupdatesite/img/installedplugin.gif"
+					style="margin-top:1px;" tooltip="Installed Plugin" />
+			</j:if>
+		</td>
+		<td class="nopadding">
+			<a href="${it.url}" target="_blank" tooltip="${it.description}">${it.title}</a>
+		</td>
+		<td class="nopadding">${it.normalizedVersion}</td>
+	</tr>
+</j:jelly>

@@ -1,0 +1,33 @@
+{
+    "id": "simpleupdatesite",
+    "plugins": {"covcomplplot":     {
+        "buildDate": "Oct 06, 2010",
+        "compatibleSinceVersion": "1.321",
+        "dependencies":         [
+                        {
+                "name": "cobertura",
+                "optional": true,
+                "version": "1.0"
+            },
+                        {
+                "name": "maven-plugin",
+                "optional": false,
+                "version": "1.325"
+            }
+        ],
+        "developers": [        {
+            "developerId": "junoyoon",
+            "email": "junoyoon@gmail.com",
+            "name": "JunHo Yoon"
+        }],
+        "excerpt": "HELLOWORLD",
+        "name": "covcomplplot",
+        "releaseTimestamp": "2010-10-06T02:57:28.00Z",
+        "requiredCore": "1.325",
+        "title": "Hudson Coverage/Complexity Scatter Plot PlugIn",
+        "url": "http://wow/plugins/covcomplplot.hpi",
+        "version": "1.0.2-SNAPSHOT",
+        "wiki": "http://wiki.hudson-ci.org/display/HUDSON/Coverage+Complexity+Scatter+Plot+PlugIn"
+    }},
+    "updateCenterVersion": 1
+}

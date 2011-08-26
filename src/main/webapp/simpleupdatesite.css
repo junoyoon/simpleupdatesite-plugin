@@ -1,0 +1,21 @@
+
+
+td.nopadding {
+	padding: 1px;
+	spacing: 0px;
+}
+
+#side-panel {
+	width: 300px !important;
+}
+
+input.pluginselect {
+	height: 1.5em;
+	line-height: 1.5em;
+	padding: 0 0.25em;
+}
+
+input[type="checkbox"].pluginselect {
+	width: 20px;
+	padding: 0;
+} /* IE6,7,8에 맞춤 */

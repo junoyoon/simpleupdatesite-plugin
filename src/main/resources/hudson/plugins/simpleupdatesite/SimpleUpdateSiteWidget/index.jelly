@@ -1,0 +1,157 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	xmlns:local="local">
+	<st:include page="/simpleupdatesite.jelly" />
+	<link type="text/css" rel="stylesheet"
+		href="${rootURL}/plugin/simpleupdatesite/simpleupdatesite.css"></link>
+
+	<d:taglib uri="local">
+		<!-- generate one row for the sid name @sid -->
+		<d:tag name="tablecontent">
+			<j:if test="${attrs.condition}">
+				<d:invokeBody />
+			</j:if>
+			<j:if test="${!attrs.condition}">
+				<tr class="nopadding">
+					<td style="height:30px;" class="nopadding">
+						<table width="100%" class="nopadding">
+							<colgroup>
+								<col width="20" />
+								<col width="*" />
+							</colgroup>
+							<tr class="nopadding">
+								<td class="nopadding">
+									<img src="${rootURL}/plugin/simpleupdatesite/img/fail.gif" />
+								</td>
+								<td class="nopadding">${attrs.errorCause}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</j:if>
+		</d:tag>
+	</d:taglib>
+
+	<l:isAdmin>
+		<form action="${rootURL}/pluginManager/install" name="pluginInstallForm">
+			<table class="pane">
+				<tr class="nopadding">
+					<td class="pane-header">
+						<span style="display:inline; float:left;">
+							Hudson Plugin Updates
+						</span>
+						<j:if test="${!it.restartNecessary}">
+							<span style="display:inline; float:right;">
+								<input type="button" value="Install" class="yui-button"
+									onclick="javascript:installSubmit(document.pluginInstallForm)" />
+							</span>
+						</j:if>
+					</td>
+				</tr>
+				<local:tablecontent condition="${it.updateSiteValid}"
+					errorCause="${it.updateSiteFailCause}">
+					<tr class="nopadding">
+						<td style="height:80px;" class="nopadding">
+							<div style="overflow:auto; width:100%; height:80px; padding:0px;">
+								<table style="width:100% !important;" class="nopadding">
+									<colgroup>
+										<col width="10" />
+										<col width="10" />
+										<col width="*" />
+										<col width="20" />
+									</colgroup>
+
+									<j:if test="${it.hasUpdatedPluginEntries()}">
+										<j:forEach var="pluginEntry" items="${it.pluginEntries}">
+											<st:include page="index.jelly" it="${pluginEntry}" />
+										</j:forEach>
+									</j:if>
+									<j:if test="${!it.hasUpdatedPluginEntries()}">
+										<tr class="nopadding">
+											<td class="nopadding" colspan="4">
+												<img
+													src="${rootURL}/plugin/simpleupdatesite/img/restartnecessary.gif" />
+												<span style="font-weight:bold"> No PlugIn Updates Available</span>
+											</td>
+										</tr>
+									</j:if>
+
+								</table>
+							</div>
+						</td>
+					</tr>
+				</local:tablecontent>
+
+				<tr class="nopadding, pane">
+					<td class="nopadding">
+						<div style="display:inline; float:right;">
+							<a
+								href="http://devcafe.nhncorp.com/?mid=issuetracker_1&amp;act=dispIssuetrackerNewIssue&amp;vid=QPTalk"
+								target="_blank">
+								<img style="cursor:hand"
+									src="${rootURL}/plugin/simpleupdatesite/img/asksupport.gif"
+									tooltip="Ask a support" />
+							</a>
+							<img style="cursor:hand"
+								src="${rootURL}/plugin/simpleupdatesite/img/refreshplugininfo.gif"
+								tooltip="Refresh plugin info"
+								onclick="javascript:refreshPluginInfo('${rootURL}/plugin/simpleupdatesite/refreshPluginInfo', this)" />
+							<img style="cursor:hand"
+								src="${rootURL}/plugin/simpleupdatesite/img/showplugins.gif"
+								tooltip="Show all hidden plugins"
+								onclick="javascript:showAllHiddenPlugins('${rootURL}/plugin/simpleupdatesite/showAllHiddenPlugins', this)" />
+							<img style="cursor:hand"
+								src="${rootURL}/plugin/simpleupdatesite/img/hideplugins.gif"
+								tooltip="Hide selected plugins"
+								onclick="javascript:hideSelectedPlugins('${rootURL}/plugin/simpleupdatesite/hidePlugins', document.pluginInstallForm, this)" />
+						</div>
+						<div style="display:none;">
+							<img src="${imagesURL}/spinner.gif" />
+						</div>
+						<div style="text-align:left"><!-- this is where the error message goes -->
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</l:isAdmin>
+	<table class="pane">
+		<tr class="nopadding">
+			<td class="pane-header">
+				<span style="display:inline; float:left;">
+					News
+				</span>
+				<div style="display:inline; float:right;">
+					<img style="cursor:hand"
+						src="${rootURL}/plugin/simpleupdatesite/img/refreshplugininfo.gif"
+						tooltip="Refresh News"
+						onclick="javascript:refreshNews('${rootURL}/plugin/simpleupdatesite/refreshNews', this)" />
+				</div>
+				<div style="display:none;">
+					<img src="${imagesURL}/spinner.gif" />
+				</div>
+				<div style="text-align:left"><!-- this is where the error message goes -->
+				</div>
+			</td>
+		</tr>
+
+		<local:tablecontent condition="${it.newsRssSiteValid}"
+			errorCause="${it.newsRssSiteFailCause}">
+			<tr class="nopadding">
+				<td style="height:80px;" class="nopadding">
+					<div style="overflow:auto; width:100%; height:80px; padding:0px;">
+						<table width="100%" class="nopadding" style="table-layout:fixed">
+							<j:forEach var="rssEntry" items="${it.rssEntries}">
+								<st:include page="index.jelly" it="${rssEntry}" />
+							</j:forEach>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr class="nopadding">
+				<td class="nopadding">
+				</td>
+			</tr>
+		</local:tablecontent>
+	</table>
+</j:jelly>
