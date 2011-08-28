@@ -38,7 +38,7 @@
 				<tr class="nopadding">
 					<td class="pane-header">
 						<span style="display:inline; float:left;">
-							Hudson Plugin Updates
+							Jenkins Plugin Updates
 						</span>
 						<j:if test="${!it.restartNecessary}">
 							<span style="display:inline; float:right;">
@@ -85,13 +85,15 @@
 				<tr class="nopadding, pane">
 					<td class="nopadding">
 						<div style="display:inline; float:right;">
-							<a
-								href="http://devcafe.nhncorp.com/?mid=issuetracker_1&amp;act=dispIssuetrackerNewIssue&amp;vid=QPTalk"
-								target="_blank">
-								<img style="cursor:hand"
-									src="${rootURL}/plugin/simpleupdatesite/img/asksupport.gif"
-									tooltip="Ask a support" />
-							</a>
+							<j:if test="${it.supportUrl != null}">
+								<a
+									href="${it.supportUrl}"
+									target="_blank">
+									<img style="cursor:hand"
+										src="${rootURL}/plugin/simpleupdatesite/img/asksupport.gif"
+										tooltip="Ask a support" />
+								</a>
+							</j:if>
 							<img style="cursor:hand"
 								src="${rootURL}/plugin/simpleupdatesite/img/refreshplugininfo.gif"
 								tooltip="Refresh plugin info"

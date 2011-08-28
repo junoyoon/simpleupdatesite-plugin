@@ -2,25 +2,32 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.jvnet.hudson.plugins</groupId>
+		<groupId>org.jenkins-ci.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>1.337</version>
-		<relativePath>../pom.xml</relativePath>
+		<version>1.398</version>
 	</parent>
-
-	<groupId>hudson.plugins</groupId>
 	<artifactId>simpleupdatesite</artifactId>
-	<name>Hudson SimpleUpdateSite Plugin</name>
-	<version>1.0.3</version>
+	<version>1.1.0-SNAPSHOT</version>
+	<name>SimpleUpdateSite Plugin</name>
+	
 	<packaging>hpi</packaging>
-	<url>http://devcafe.nhncorp.com/QPTalk/wiki_1/entry/Hudson/SimpleUpdateSite%20%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95</url>
-	<properties>
-		<powermock.version>1.4</powermock.version>
-	</properties>
-	<!--
-		get every artifact through maven.glassfish.org, which proxies all the
-		artifacts that we need
-	-->
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/SimpleUpdateSite+Plugin</url>
+
+
+	<scm>
+		<connection>scm:git:git://github.com/jenkinsci/covcomplplot-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/covcomplplot-plugin.git</developerConnection>
+		<url>https://github.com/jenkinsci/covcomplplot-plugin</url>
+	</scm>
+	
+	<developers>
+		<developer>
+			<id>junoyoon</id>
+			<name>JunHo Yoon</name>
+			<email>junoyoon@gmail.com</email>
+		</developer>
+	</developers>
+	
 	<repositories>
 		<repository>
 			<id>m.g.o-public</id>
@@ -39,6 +46,10 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<properties>
+		<powermock.version>1.4</powermock.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>rome</groupId>
@@ -144,7 +155,7 @@
 		<profile>
 			<id>clover</id>
 			<properties>
-				<clover.license>clover.license</clover.license>
+				<clover.license>../clover.license</clover.license>
 			</properties>
 			<build>
 				<plugins>

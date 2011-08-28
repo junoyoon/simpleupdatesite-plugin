@@ -43,9 +43,13 @@ public class SimpleUpdateSiteWidget extends Widget {
 		return getPlugin().isNewsRssSiteValid();
 	}
 
+	public String getSupportUrl() {
+		return getPlugin().getSupportUrl();
+	}
+
 	public String getNewsRssSiteFailCause() {
 		return getPlugin().getNewsRssSiteFailCause()
-			+ String.format("<a href='%sconfigure'>Hudson configuration</a>", Hudson.getInstance().getRootUrlFromRequest());
+			+ String.format("<a href='%sconfigure'>Jenkins configuration</a>", Hudson.getInstance().getRootUrlFromRequest());
 	}
 
 	public boolean isUpdateSiteValid() {
@@ -57,11 +61,11 @@ public class SimpleUpdateSiteWidget extends Widget {
 
 	public String getUpdateSiteFailCause() {
 		if (isRestartNecessary()) {
-			return String.format("<b><a href='%srestart'>Restart Hudson</a> to apply updated plugins</b>", Hudson.getInstance()
+			return String.format("<b><a href='%srestart'>Restart Jenkins</a> to apply updated plugins</b>", Hudson.getInstance()
 				.getRootUrlFromRequest());
 		}
 		return getPlugin().getUpdateSiteFailCause()
-			+ String.format("<a href='%sconfigure'>Hudson configuration</a>", Hudson.getInstance().getRootUrlFromRequest());
+			+ String.format("<a href='%sconfigure'>Jenkins configuration</a>", Hudson.getInstance().getRootUrlFromRequest());
 	}
 
 	public boolean hasUpdatedPluginEntries() {

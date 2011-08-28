@@ -12,7 +12,7 @@ import hudson.model.Hudson;
 import java.io.IOException;
 
 /**
- * Class for async peridocally download update site content.
+ * Class for async periodically download update site content.
  * 
  * @author JunHo Yoon
  */

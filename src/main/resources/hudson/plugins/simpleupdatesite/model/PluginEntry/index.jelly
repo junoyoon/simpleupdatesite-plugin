@@ -9,7 +9,7 @@
 				</j:if>
 				<j:if test="${it.forNewerHudson}">
 					<img src="${rootURL}/plugin/simpleupdatesite/img/incompatible.gif"
-						tooltip="Hudson Core after ${it.requiredCore} is necessary for this plugin." />
+						tooltip="Jenkins Core after ${it.requiredCore} is necessary for this plugin." />
 				</j:if>
 			</j:if>
 			<j:if test="${it.installed}">

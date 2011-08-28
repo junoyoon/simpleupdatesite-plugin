@@ -12,13 +12,22 @@ import java.lang.Character.UnicodeBlock;
  * @author JunHo Yoon
  */
 public class HudsonUtil {
+	/**
+	 * Get the visible length of string. This version only has the Korean
+	 * checking.
+	 * 
+	 * @param str
+	 * @return
+	 */
 	public int length(String str) {
 		int length = 0;
 		for (int i = 0; i < str.length(); i++) {
 			char ch = str.charAt(i);
 			Character.UnicodeBlock unicodeBlock = Character.UnicodeBlock.of(ch);
-			if (UnicodeBlock.HANGUL_SYLLABLES.equals(unicodeBlock) || UnicodeBlock.HANGUL_COMPATIBILITY_JAMO.equals(unicodeBlock)
-				|| UnicodeBlock.HANGUL_JAMO.equals(unicodeBlock)) {
+			if (UnicodeBlock.HANGUL_SYLLABLES.equals(unicodeBlock)
+					|| UnicodeBlock.HANGUL_COMPATIBILITY_JAMO
+							.equals(unicodeBlock)
+					|| UnicodeBlock.HANGUL_JAMO.equals(unicodeBlock)) {
 				length += 2;
 			} else {
 				length++;

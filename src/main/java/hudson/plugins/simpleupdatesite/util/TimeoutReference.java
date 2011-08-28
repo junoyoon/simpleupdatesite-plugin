@@ -5,7 +5,7 @@
 package hudson.plugins.simpleupdatesite.util;
 
 /**
- * Utility class which contains timeouttable reference.
+ * Utility class which contains the reference which will be expired after the assigned limit.
  * 
  * @author JunHo Yoon
  */

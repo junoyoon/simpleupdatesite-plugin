@@ -22,7 +22,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 /**
- * UpdateSite extension to block default {@link UpdateSite} behavior
+ * UpdateSite extension to hack default {@link UpdateSite} behavior
  * 
  * @author JunHo Yoon
  */
@@ -44,6 +44,10 @@ public class SimpleUpdateSite extends UpdateSite {
 		return Hudson.getInstance().getPlugin(SimpleUpdateSitePlugIn.class);
 	}
 
+	@Override
+	public boolean isLegacyDefault() {
+		return false;
+	}
 	/**
 	 * This is the endpoint that receives the update center data file from the
 	 * browser.
@@ -86,7 +90,7 @@ public class SimpleUpdateSite extends UpdateSite {
 	/**
 	 * Returns the list of plugins that are updates to currently installed ones.
 	 * 
-	 * 1 * @return can be empty but never null.
+	 * @return can be empty but never null.
 	 */
 	@Override
 	public List<Plugin> getUpdates() {

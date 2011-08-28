@@ -52,8 +52,8 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 /**
- * UpdateSite Plugin which retrieve update site and news content from custom
- * location
+ * SimpleUpdateSite Plugin which retrieves updatesite.json and news content from
+ * custom location
  * 
  * @author JunHo Yoon
  */
@@ -150,6 +150,7 @@ public class SimpleUpdateSitePlugIn extends Plugin {
 
 	private String newsRssUrl;
 	private String updateSiteUrl;
+	private String supportUrl;
 	private final Set<String> hiddenPluginList = new HashSet<String>();
 
 	private transient boolean updateSiteValid = true;
@@ -177,6 +178,8 @@ public class SimpleUpdateSitePlugIn extends Plugin {
 			downloadUpdateSiteJSON();
 			this.pluginEntryReference.invalidate();
 		}
+
+		supportUrl = StringUtils.trimToNull(req.getParameter("simpleupdatesite.supportUrl"));
 		save();
 	}
 
@@ -305,7 +308,7 @@ public class SimpleUpdateSitePlugIn extends Plugin {
 		}
 	}
 
-	public String getUpdateCenterJSON(String url) throws HttpException, IOException {
+	public String getUpdateSiteJSON(String url) throws HttpException, IOException {
 		GetMethod method = new GetMethod(url);
 		InputStream responseBodyAsStream = null;
 		try {
@@ -336,7 +339,7 @@ public class SimpleUpdateSitePlugIn extends Plugin {
 
 	public void downloadUpdateSiteJSONForce() throws HttpException, IOException {
 		SimpleUpdateSitePlugIn.LOGGER.log(Level.INFO, "fetching update json from " + getUpdateSiteUrl());
-		String json = getUpdateCenterJSON(getUpdateSiteUrl());
+		String json = getUpdateSiteJSON(getUpdateSiteUrl());
 		try {
 			json = stripOutCallBackMethod(json);
 			writeUpdateSiteInfo(json);
@@ -453,4 +456,9 @@ public class SimpleUpdateSitePlugIn extends Plugin {
 	public String getNewsRssSiteFailCause() {
 		return this.newsRssSiteFailCause;
 	}
+
+	public String getSupportUrl() {
+		return supportUrl;
+	}
+
 }
