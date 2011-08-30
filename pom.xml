@@ -15,9 +15,9 @@
 
 
 	<scm>
-		<connection>scm:git:git://github.com/jenkinsci/covcomplplot-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:jenkinsci/covcomplplot-plugin.git</developerConnection>
-		<url>https://github.com/jenkinsci/covcomplplot-plugin</url>
+		<connection>scm:git:git://github.com/jenkinsci/simpleupdatesite-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/simpleupdatesite-plugin.git</developerConnection>
+		<url>https://github.com/jenkinsci/simpleupdatesite-plugin</url>
 	</scm>
 	
 	<developers>
@@ -106,11 +106,11 @@
 					<plugin>
 						<groupId>com.klocwork.ps</groupId>
 						<artifactId>kwmaven</artifactId>
+						<configuration>
+								<buildspec_filename>${KWINJECT_OUT_PATH}</buildspec_filename>
+						</configuration>
 						<executions>
 							<execution>
-								<configuration>
-									<buildspec_filename>klocwork/kwinject.out</buildspec_filename>
-								</configuration>
 								<phase>validate</phase>
 								<goals>
 									<goal>run</goal>
